@@ -61,10 +61,10 @@ public class userInput {
                 String [] parts = UserLine.split(",", 2);
                 try {
                     if (!checkName(parts[0])) {
-                        throw new Exception("ERROR: User Name {" + parts[0] + "} is wrong:");
+                        throw new Exception("ERROR: User Name {" + parts[0] + "} is wrong");
                     }
                     else if (!checkId(parts[1])) {
-                        throw new Exception("ERROR: User Id {" + parts[1] + "} is wrong:");
+                        throw new Exception("ERROR: User Id {" + parts[1] + "} is wrong");
                     }
 
                     user.setUserName(parts[0].trim());

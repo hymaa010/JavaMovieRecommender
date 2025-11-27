@@ -2,7 +2,6 @@ package com.example;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.*;
-import java.util.AbstractMap.SimpleEntry;
 public class Main {
     public static void main(String[] args) {
         try {
@@ -14,12 +13,12 @@ public class Main {
 
         movieInput mi = new movieInput();
         Vector<Movie> movies;
-        mi.setFilePath("E:/apps/VS Code/sw testing project/demo/src/main/java/com/example/movies.txt");
+        mi.setFilePath("src\\com\\example\\inputs\\movies.txt");
         movies = mi.getMovies();
 
         userInput ui = new userInput();
         Vector<User> users;
-        ui.setFilePath("E:/apps/VS Code/sw testing project/demo/src/main/java/com/example/users.txt");
+        ui.setFilePath("src\\com\\example\\inputs\\users.txt");
         users = ui.getUsers();
         
         for (User user : users) {
