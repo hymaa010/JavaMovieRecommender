@@ -33,7 +33,9 @@ public class movieInput {
                 } else return false;
             }
         }
-        return true;
+        if(String.valueOf(id.charAt(idx)).matches("[0-9]"))
+            return true;
+        else return false;
     }
     public boolean checkIdNumber(String id) {
         if(moviesFound [Integer.valueOf(id.substring(id.length()-3, id.length()))])
@@ -96,3 +98,4 @@ public class movieInput {
         return map;
     }
 }
+
