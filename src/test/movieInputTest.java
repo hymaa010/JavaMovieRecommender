@@ -104,7 +104,7 @@ public class movieInputTest {
     void testGetMoviesInvalidTitle() throws Exception {
         File temp = File.createTempFile("movies", ".txt");
         try (PrintWriter pw = new PrintWriter(temp)) {
-            pw.println("She's The Man,STM001"); // lowercase start → ERROR
+            pw.println("she's The Man,STM001"); // lowercase start → ERROR
             pw.println("Romantic,Teen Fiction,Comedy");
         }
 
