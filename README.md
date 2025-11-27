@@ -35,8 +35,9 @@ src/
 │   ├── Recommendation.java   // Recommendation engine
 │   ├── movieInput.java       // Parser for movies.txt + validation
 │   ├── userInput.java        // Parser for users.txt + validation
-│   ├── movies.txt            // Movie data source
-│   └── users.txt             // User data source
+│   ├── input/                // Data folder
+│   │   ├── movies.txt        // Movie data source
+│   │   └── users.txt         // User data source
 │
 └── test/                     // Unit tests
     ├── MovieTest.java
