@@ -1,0 +1,8 @@
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Entities\Movie.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Entities\User.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Main.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Readers\movieInput.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Readers\userInput.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Validators\movie_validator.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Validators\user_validator.java
+D:\GitHub\JavaMovieRecommender\demo\src\main\java\com\example\Writers\Recommendation.java

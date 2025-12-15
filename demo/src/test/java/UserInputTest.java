@@ -1,12 +1,18 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Vector;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.example.User;
-import com.example.userInput;
+import com.example.Entities.User;
+import com.example.Readers.userInput;
+import com.example.Validators.user_validator;
 
 class UserInputTest {
     private userInput ui = new userInput();
@@ -26,47 +32,47 @@ class UserInputTest {
     
     @Test
     void testCheckName_valid() {
-        assertTrue(ui.checkName("Ziad Tamer"));
-        assertTrue(ui.checkName("Ziad"));
+        assertTrue(user_validator.checkName("Ziad Tamer"));
+        assertTrue(user_validator.checkName("Ziad"));
     }
     
     @Test
     void testCheckName_startsWithSpace() {
-        assertFalse(ui.checkName(" Mazen"));
+        assertFalse(user_validator.checkName(" Mazen"));
     }
     
     @Test
     void testCheckName_containsNumbers() {
-        assertFalse(ui.checkName("Rana2"));
+        assertFalse(user_validator.checkName("Rana2"));
     }
     
     @Test
     void testCheckName_containsSpecialChars() {
-        assertFalse(ui.checkName("Shahd@"));
+        assertFalse(user_validator.checkName("Shahd@"));
     }
     
     @Test
     void testCheckId_valid() {
-        assertTrue(ui.checkId("12345678B"));
+        assertTrue(user_validator.checkId("12345678B"));
     }
     
     @Test
     void testCheckId_invalidLength() {
-        assertFalse(ui.checkId("1234"));
+        assertFalse(user_validator.checkId("1234"));
     }
     @Test
     void testCheckId_invalidDigit() {
-        assertFalse(ui.checkId("1234A678A"));
+        assertFalse(user_validator.checkId("1234A678A"));
     }
     
     @Test
     void testCheckId_allnumbers() {
-        assertTrue(ui.checkId("123456789"));
+        assertTrue(user_validator.checkId("123456789"));
     }
     @Test
     void testCheckId_duplicate() {
-        assertTrue(ui.checkId("12345678Z"));
-        assertFalse(ui.checkId("12345678Z"));
+        assertTrue(user_validator.checkId("12345678Z"));
+        assertFalse(user_validator.checkId("12345678Z"));
     }
     @Test
     void testGetUsers_validFile() throws Exception {

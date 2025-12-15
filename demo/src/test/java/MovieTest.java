@@ -1,8 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-import com.example.Movie;
+import com.example.Entities.Movie;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MovieTest {
     private Movie movie;

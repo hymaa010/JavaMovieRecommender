@@ -1,43 +1,61 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
-import java.lang.reflect.Field;
-import java.util.*;
-import java.util.AbstractMap.SimpleEntry;
+import java.util.Vector;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.example.Movie;
-import com.example.Recommendation;
-import com.example.User;
-import com.example.movieInput;
+import com.example.Readers.movieInput;
+import com.example.Entities.Movie;
+import com.example.Entities.User;
+import com.example.Validators.movie_validator;
+import com.example.Validators.user_validator;
+import com.example.Writers.Recommendation;
 
 public class RecommendationTest {
     private User user;
 
     @BeforeEach
-    public void resetBeforeEach() throws Exception {
-        // Reset user
+    public void BeforeEach() throws Exception {
         user = new User();
         user.setUserName("ibrahim");
         user.setUserId("123456789");
+        movie_validator.reset();
+        user_validator.reset();
+        movieInput.resetMap();
 
-        // Reset static fields in movieInput
-        Field mapField = movieInput.class.getDeclaredField("map");
-        mapField.setAccessible(true);
-        mapField.set(null, new HashMap<String, Vector<SimpleEntry<String, String>>>());
-
-        Field moviesFoundField = movieInput.class.getDeclaredField("moviesFound");
-        moviesFoundField.setAccessible(true);
-        moviesFoundField.set(null, new boolean[1000]);
+        
+    }
+   
+    private String createTestFile(String content) throws IOException {
+        File temp = File.createTempFile("testFile", ".txt");
+        temp.deleteOnExit();
+        try (FileWriter writer = new FileWriter(temp)) {
+            writer.write(content);
+        }
+        return temp.getAbsolutePath();
     }
 
     @Test
-    public void testRecommendMovies_WithRecommendations() {
+    public void testRecommendMovies_WithRecommendations() throws IOException {
+
+        String content =
+
+            "Inception,I001\n" +
+            "Sci-Fi,Thriller\n" +
+            "The Godfather,TG002\n" +
+            "Crime,Drama\n" +
+            "The Matrix,TM003\n" +
+            "Sci-Fi,Action\n";
+                        
+        String path = createTestFile(content);
         movieInput mi = new movieInput();
-        mi.setFilePath("E:\\apps\\VS Code\\sw testing project\\demo\\src\\test\\java\\test1Movies.txt");
+        mi.setFilePath(path);
         Vector<Movie> movies = mi.getMovies();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -56,9 +74,16 @@ public class RecommendationTest {
     }
 
     @Test
-    public void testRecommendMovies_NoRecommendedMovies() {
+    public void testRecommendMovies_NoRecommendedMovies() throws IOException {
+        String content =
+            "Inception,I001\n" +
+            "Sci-Fi,Thriller\n" +
+            "The Godfather,TG002\n" +
+            "Crime,Drama\n";
+                        
+        String path = createTestFile(content);
         movieInput mi = new movieInput();
-        mi.setFilePath("E:\\apps\\VS Code\\sw testing project\\demo\\src\\test\\java\\test2Movies.txt");
+        mi.setFilePath(path);
         Vector<Movie> movies = mi.getMovies();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -78,9 +103,18 @@ public class RecommendationTest {
     }
 
     @Test
-    public void testRecommendMovies_MultipleLikedMovies() {
+    public void testRecommendMovies_MultipleLikedMovies() throws IOException {
         movieInput mi = new movieInput();
-        mi.setFilePath("E:\\apps\\VS Code\\sw testing project\\demo\\src\\test\\java\\test1Movies.txt");
+        String content =
+          "Inception,I001\n" +
+            "Sci-Fi,Thriller\n" +
+            "The Godfather,TG002\n" +
+            "Crime,Drama\n" +
+            "The Matrix,TM003\n" +
+            "Sci-Fi,Action\n";
+        String path = createTestFile(content);
+        mi.setFilePath(path);
+        
         Vector<Movie> movies = mi.getMovies();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -100,9 +134,19 @@ public class RecommendationTest {
     }
 
     @Test
-    public void testRecommendMovies_UserHasNoLikedMovies() {
+    public void testRecommendMovies_UserHasNoLikedMovies() throws IOException {
+        String content =
+
+            "Inception,I001\n" +
+            "Sci-Fi,Thriller\n" +
+            "The Godfather,TG002\n" +
+            "Crime,Drama\n" +
+            "The Matrix,TM003\n" +
+            "Sci-Fi,Action\n";
+                        
+        String path = createTestFile(content);
         movieInput mi = new movieInput();
-        mi.setFilePath("E:\\apps\\VS Code\\sw testing project\\demo\\src\\test\\java\\test1Movies.txt");
+        mi.setFilePath(path);
         Vector<Movie> movies = mi.getMovies();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -119,9 +163,19 @@ public class RecommendationTest {
         assertEquals("ibrahim, 123456789", out.toString().trim());
     }
     @Test
-    public void testRecommendMovies_InvalidLikedMovieId() {
+    public void testRecommendMovies_InvalidLikedMovieId() throws IOException {
+        String content =
+
+            "Inception,I001\n" +
+            "Sci-Fi,Thriller\n" +
+            "The Godfather,TG002\n" +
+            "Crime,Drama\n" +
+            "The Matrix,TM003\n" +
+            "Sci-Fi,Action\n";
+                        
+        String path = createTestFile(content);
         movieInput mi = new movieInput();
-        mi.setFilePath("E:\\apps\\VS Code\\sw testing project\\demo\\src\\test\\java\\test1Movies.txt");
+        mi.setFilePath(path);
         Vector<Movie> movies = mi.getMovies();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
