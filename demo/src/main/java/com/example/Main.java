@@ -13,12 +13,12 @@ public class Main {
 
         movieInput mi = new movieInput();
         Vector<Movie> movies;
-        mi.setFilePath("src\\com\\example\\inputs\\movies.txt");
+        mi.setFilePath("demo\\src\\main\\java\\com\\example\\movies.txt");
         movies = mi.getMovies();
 
         userInput ui = new userInput();
         Vector<User> users;
-        ui.setFilePath("src\\com\\example\\inputs\\users.txt");
+        ui.setFilePath("demo\\src\\main\\java\\com\\example\\users.txt");
         users = ui.getUsers();
         
         for (User user : users) {

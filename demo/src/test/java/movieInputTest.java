@@ -1,9 +1,12 @@
+
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.*;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
+
+import com.example.Movie;
+import com.example.movieInput;
 
 public class movieInputTest {
 
@@ -13,7 +16,7 @@ public class movieInputTest {
     void setup() {
         mi = new movieInput();
     }
-////////////////////////////////////////////////////////////
+
 
     @Test
     void testValidTitle() {
@@ -24,15 +27,15 @@ public class movieInputTest {
 
     @Test
     void testInvalidTitleFirstChar() {
-        assertFalse(mi.checkTitle("pulp Fiction"));   // starts lowercase
-        assertFalse(mi.checkTitle("7Seven"));  // starts number
-        assertFalse(mi.checkTitle(" Wonder"));  // starts with space
-        assertFalse(mi.checkTitle("WALL -E"));  // after any space can't be special character or number
+        assertFalse(mi.checkTitle("pulp Fiction"));
+        assertFalse(mi.checkTitle("7Seven"));
+        assertFalse(mi.checkTitle(" Wonder"));
+        assertFalse(mi.checkTitle("WALL -E"));
     }
 
     @Test
     void testInvalidTitleAfterSpace() {
-        assertFalse(mi.checkTitle("The god Father"));  // lowercase after space
+        assertFalse(mi.checkTitle("The god Father"));
     }
 
     @Test
@@ -43,19 +46,19 @@ public class movieInputTest {
 
     @Test
     void testInvalidIdLetters() {
-        assertFalse(mi.checkIdLetters("Mission Impossible", "IM123"));      // wrong order
-        assertFalse(mi.checkIdLetters("Final Destination", "MW678"));     // mismatch
+        assertFalse(mi.checkIdLetters("Mission Impossible", "IM123"));
+        assertFalse(mi.checkIdLetters("Final Destination", "MW678"));
     }
 
-//////////////////////////////////////////////////////////////
+
 
     @Test
     void testCheckIdNumberUnique() {
         assertTrue(mi.checkIdNumber("APT123"));
-        assertFalse(mi.checkIdNumber("APT123")); // repeated last 3 digits
+        assertFalse(mi.checkIdNumber("APT123"));
     }
 
-///////////////////////////////////////////////////////////////
+
 
     @Test
     void testGetMoviesValidInput() throws Exception {
@@ -97,35 +100,35 @@ public class movieInputTest {
         assertTrue(map.containsKey("Musical"));
         assertTrue(map.containsKey("Historical"));
 
-        assertEquals(2, map.get("Drama").size()); // Forrest Gump and The Karate Kid
+        assertEquals(2, map.get("Drama").size());
     }
 
     @Test
     void testGetMoviesInvalidTitle() throws Exception {
         File temp = File.createTempFile("movies", ".txt");
         try (PrintWriter pw = new PrintWriter(temp)) {
-            pw.println("she's The Man,STM001"); // lowercase start → ERROR
+            pw.println("she's The Man,STM001");
             pw.println("Romantic,Teen Fiction,Comedy");
         }
 
         mi.setFilePath(temp.getAbsolutePath());
         Vector<Movie> movies = mi.getMovies();
 
-        assertEquals(0, movies.size()); // invalid title prevents adding
+        assertEquals(0, movies.size());
     }
 
     @Test
     void testGetMoviesInvalidIdLetters() throws Exception {
         File temp = File.createTempFile("movies", ".txt");
         try (PrintWriter pw = new PrintWriter(temp)) {
-            pw.println("Scarface,SF001");  // wrong ID letters
+            pw.println("Scarface,SF001");
             pw.println("Action,Crime");
         }
 
         mi.setFilePath(temp.getAbsolutePath());
         Vector<Movie> movies = mi.getMovies();
 
-        assertEquals(0, movies.size()); // invalid title prevents adding
+        assertEquals(0, movies.size());
     }
 
     @Test
@@ -142,8 +145,8 @@ public class movieInputTest {
         mi.setFilePath(temp.getAbsolutePath());
         Vector<Movie> movies = mi.getMovies();
 
-        assertEquals(1, movies.size()); // second movie is rejected
+        assertEquals(1, movies.size());
     }
-    /////////////////////////////////////////////////
+    
 
 }

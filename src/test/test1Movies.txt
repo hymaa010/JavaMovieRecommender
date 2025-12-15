@@ -1,6 +1,0 @@
-Inception,I001
-Sci-Fi,Thriller
-The Godfather,TG002
-Crime,Drama
-The Matrix,TM003
-Sci-Fi,Action

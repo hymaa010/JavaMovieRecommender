@@ -19,10 +19,12 @@ public class RecommendationTest {
 
     @BeforeEach
     public void resetBeforeEach() throws Exception {
+        // Reset user
         user = new User();
         user.setUserName("ibrahim");
         user.setUserId("123456789");
 
+        // Reset static fields in movieInput
         Field mapField = movieInput.class.getDeclaredField("map");
         mapField.setAccessible(true);
         mapField.set(null, new HashMap<String, Vector<SimpleEntry<String, String>>>());

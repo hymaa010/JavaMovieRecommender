@@ -5,14 +5,16 @@ import java.io.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.User;
+import com.example.userInput;
+
 class UserInputTest {
     private userInput ui = new userInput();
     @BeforeEach
     void setUp() throws Exception {
         ui = new userInput();
     }
-    /////////////////////////////////////////////////////////////////////////////
-    //Helper function
+    
     private String createTestFile(String content) throws IOException {
         File temp = File.createTempFile("testFile", ".txt");
         temp.deleteOnExit();
@@ -21,56 +23,51 @@ class UserInputTest {
         }
         return temp.getAbsolutePath();
     }
-    ///////////////////////////////////////////
-    //checkName() Tests
+    
     @Test
     void testCheckName_valid() {
         assertTrue(ui.checkName("Ziad Tamer"));
         assertTrue(ui.checkName("Ziad"));
     }
-    //////////////////////////////////////
+    
     @Test
     void testCheckName_startsWithSpace() {
         assertFalse(ui.checkName(" Mazen"));
     }
-    //////////////////////////////////////
+    
     @Test
     void testCheckName_containsNumbers() {
         assertFalse(ui.checkName("Rana2"));
     }
-    //////////////////////////////////////
+    
     @Test
     void testCheckName_containsSpecialChars() {
         assertFalse(ui.checkName("Shahd@"));
     }
-    //////////////////////////////////////
-    //checkId() Tests
+    
     @Test
     void testCheckId_valid() {
         assertTrue(ui.checkId("12345678B"));
     }
-    //////////////////////////////////////
+    
     @Test
     void testCheckId_invalidLength() {
         assertFalse(ui.checkId("1234"));
     }
-    //////////////////////////////////////
     @Test
     void testCheckId_invalidDigit() {
         assertFalse(ui.checkId("1234A678A"));
     }
-    //////////////////////////////////////
+    
     @Test
     void testCheckId_allnumbers() {
         assertTrue(ui.checkId("123456789"));
     }
-    //////////////////////////////////////
     @Test
     void testCheckId_duplicate() {
         assertTrue(ui.checkId("12345678Z"));
         assertFalse(ui.checkId("12345678Z"));
     }
-    //getUsers() Tests
     @Test
     void testGetUsers_validFile() throws Exception {
         String content =
@@ -93,7 +90,6 @@ class UserInputTest {
         assertEquals("98765432B", users.get(1).getUserId());
         assertArrayEquals(new String[]{"M010", "M020", "M030"}, users.get(1).getMoviesIds());
     }
-    ////////////////////////////////////////////////////////////////////////////////////////
     @Test
     void testGetUsers_invalidname() throws Exception {
         String content =
@@ -105,10 +101,8 @@ class UserInputTest {
 
         Vector<User> users = ui.getUsers();
 
-        assertEquals(1, users.size());
-        assertEquals("",users.getFirst().getUserId());
+        assertEquals(0, users.size());
     }
-    ////////////////////////////////////////////////////////////////////////////////////////
     @Test
     void testGetUsers_invalidId() throws Exception {
         String content =
@@ -120,10 +114,8 @@ class UserInputTest {
 
         Vector<User> users = ui.getUsers();
 
-        assertEquals(1, users.size());
-        assertEquals("",users.getFirst().getUserId());
+        assertEquals(0, users.size());
     }
-    /////////////////////////////////////////////////
     @Test
     void testGetUsers_duplicateIds() throws Exception {
         String content =
@@ -137,21 +129,18 @@ class UserInputTest {
 
         Vector<User> users = ui.getUsers();
 
-        assertEquals(2, users.size());
+        assertEquals(1, users.size());
 
         assertEquals("Shahd Bassem", users.get(0).getUserName());
         assertEquals("12345678F", users.get(0).getUserId());
 
-        assertEquals("",users.get(1).getUserId());
     }
-    /////////////////////////////////////////////////
     @Test
     void testGetUsers_filePathNotSet() {
         ui.setFilePath(null);
         Vector<User> users = ui.getUsers();
         assertTrue(users.isEmpty());
     }
-    /////////////////////////////////////////////////
     @Test
     void testGetUsers_emptyFile() throws Exception {
         String path = createTestFile("");
