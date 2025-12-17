@@ -3,7 +3,7 @@ import org.junit.jupiter.api.*;
 
 import com.example.Entities.User;
 
-public class UserTest {
+class UserTest {
 
     private User user;
 
@@ -41,8 +41,7 @@ public class UserTest {
 
     @Test
     void testMoviesIdsDefaultValuesAreNull() {
-        String[] arr = user.getMoviesIds();
-        for (String s : arr) {
+        for (String s : user.getMoviesIds()) {
             assertNull(s);
         }
     }
