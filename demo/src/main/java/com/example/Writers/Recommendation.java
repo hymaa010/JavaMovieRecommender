@@ -21,7 +21,6 @@ public class Recommendation {
         Set<String> likedIds = new HashSet<>(Arrays.asList(user.getMoviesIds()));
         Set<String> recommendedTitles = new LinkedHashSet<>(); 
 
-        // Build lookup map once
         Map<String, Movie> movieById = new HashMap<>();
         for (Movie m : movies) {
             movieById.put(m.getMovieId(), m);
@@ -43,7 +42,6 @@ public class Recommendation {
             }
         }
 
-
 recommendations.addAll(recommendedTitles);
 
         for (String recMovieId : recommendations) {
@@ -57,7 +55,4 @@ recommendations.addAll(recommendedTitles);
         System.out.println();
         
     }
-    
-
-
 }
