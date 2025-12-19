@@ -27,22 +27,43 @@ A Java console application that recommends movies based on genres the user alrea
 
 ```
 src/
+├── main
+│   └── java
+│       └── com/example
+│           ├── Entities
+│           │   ├── Movie.java
+│           │   └── User.java
+│           │
+│           ├── Readers
+│           │   ├── movieInput.java
+│           │   └── userInput.java
+│           │
+│           ├── Validators
+│           │   ├── movie_validator.java
+│           │   └── user_validator.java
+│           │
+│           ├── Writers
+│           │   └── Recommendation.java
+│           │
+│           ├── Resources
+│           │   ├── movies.txt
+│           │   └── users.txt
+│           │
+│           └── Main.java
 │
-├── com/example/              // Core application logic
-│   ├── Main.java             // Entry point of the program
-│   ├── Movie.java            // Movie model (title, ID, genres)
-│   ├── User.java             // User model (name, ID, liked movies)
-│   ├── Recommendation.java   // Recommendation engine
-│   ├── movieInput.java       // Parser for movies.txt + validation
-│   ├── userInput.java        // Parser for users.txt + validation
-│   ├── input/                // Data folder
-│   │   ├── movies.txt        // Movie data source
-│   │   └── users.txt         // User data source
-│
-└── test/                     // Unit tests
-    ├── MovieTest.java
-    ├── UserInputTest.java
-    └── movieInputTest.java
+└── test
+    └── java
+        ├── MovieTest.java
+        ├── UserTest.java
+        ├── UserValidatorTest.java
+        ├── movieValidatorTest.java
+        ├── ReaderEntityIntegrationTest.java
+        ├── RecommendationEndToEndTest.java
+        │
+        └── TopToDownTesting
+            ├── RecommendationTest_Level1.java
+            ├── MovieInputTest_Level2.java
+            └── UserInputTest_Level2.java
 ```
 
 ---
@@ -116,3 +137,8 @@ These tests ensure:
 * genre lists and relationships are processed correctly
   
 ---
+
+
+
+
+=
