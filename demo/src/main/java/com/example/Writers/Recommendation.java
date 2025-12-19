@@ -15,7 +15,6 @@ public class Recommendation {
     public static void recommendMovies( User user, Vector<Movie> movies) {
         System.out.println(user.getUserName()+", " + user.getUserId());
         Map <String,Vector<SimpleEntry<String, String>>> map2 = movieInput.getMap();
-        boolean first = true;
         Set<String> recommendations = new HashSet<>();
 
         Set<String> likedIds = new HashSet<>(Arrays.asList(user.getMoviesIds()));
@@ -41,9 +40,12 @@ public class Recommendation {
                 }
             }
         }
-
-recommendations.addAll(recommendedTitles);
-
+    if (recommendedTitles.isEmpty()) {
+        System.out.println("No recommendations available");
+        return;
+    }
+        recommendations.addAll(recommendedTitles);
+        boolean first = true;
         for (String recMovieId : recommendations) {
             if (first) {
                 System.out.print(recMovieId);
