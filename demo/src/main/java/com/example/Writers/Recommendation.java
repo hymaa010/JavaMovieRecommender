@@ -46,7 +46,6 @@ public class Recommendation {
 
 recommendations.addAll(recommendedTitles);
 
-
         for (String recMovieId : recommendations) {
             if (first) {
                 System.out.print(recMovieId);
